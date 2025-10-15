@@ -2,7 +2,5 @@ fastapi
 pydantic
 joblib
 lime
-plotly
 uvicorn
-streamlit
 pytest
