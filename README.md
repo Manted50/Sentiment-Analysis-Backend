@@ -25,4 +25,4 @@ This project was made in a studying context to show all the pipelines that we ca
 
 Before the run of the application, please modify the ui.py to use the good localhost URL.
 
-Here is the result Website : https://sentiment-analysis-backend-g4h6.onrender.com/
+Here is the result Website : https://mlops-sentiment-analysis-frontend.streamlit.app/
