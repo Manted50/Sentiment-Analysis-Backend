@@ -1,12 +1,6 @@
 # French sentiment analyser
 
-This project was made in a studying context to show all the pipeline that we can applied for a ML project. The idea is to create a model to classify sentences and know if it's positive or negative using sklearn and mlflow. Then, we can use it for a website project using FastAPI and Streamlit libraries. At the end, we tried to automatise that using the deployment of render and Streamlit Cloud. It shows how a Machine Learning project can evolve properly in companies. 
-
-## Features
-
-- Feature 1
-- Feature 2
-- Feature 3
+This project was made in a studying context to show all the pipelines that we can apply for an ML project. The idea is to create a model to classify sentences and know if it's positive or negative using sklearn and MLflow. Then, we can use it for a website project using FastAPI and Streamlit libraries. At the end, we tried to automate that using the deployment of render and Streamlit Cloud. It shows how a Machine Learning project can evolve properly in companies. 
 
 ## Installation
 
@@ -20,7 +14,7 @@ This project was made in a studying context to show all the pipeline that we can
     ```
 3. Run the backend:
     ```bash
-    uvicorn main_api:app --reload
+    uvicorn main:app --reload
     ```
 4. Run the frontend:
     ```bash
