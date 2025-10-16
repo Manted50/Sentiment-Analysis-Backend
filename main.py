@@ -68,12 +68,40 @@ def explain_sentiment_with_lime(input: TweetRequest):
         sentiment = "positive" if probabilities[1] > probabilities[0] else "negative"
         label_to_explain = 1 if sentiment == "positive" else 0
 
+        # Récupère uniquement l'explication pour la classe prédite
         important_words = [
             {"word": word, "importance": float(importance)}
             for word, importance in explanation.as_list(label=label_to_explain)
         ]
 
-        html_expl = explanation.as_html(label=label_to_explain)
+        # Génère l'HTML pour toutes les classes, puis filtre via JS (solution robuste)
+        # Ou bien, on génère un HTML personnalisé en Python
+        exp = explanation.as_list(label=label_to_explain)
+        html_expl = f"""
+        <div style="text-align: center; margin-bottom: 10px;">
+            <h3>Explication pour le sentiment {sentiment.upper()}</h3>
+        </div>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="text-align: left; padding: 8px;">Mot</th>
+                    <th style="text-align: right; padding: 8px;">Importance</th>
+                </tr>
+            </thead>
+            <tbody>
+        """
+        for word, importance in exp:
+            color = "green" if importance > 0 else "red"
+            html_expl += f"""
+                <tr>
+                    <td style="text-align: left; padding: 8px;"><b>{word}</b></td>
+                    <td style="text-align: right; padding: 8px; color: {color};">{importance:.4f}</td>
+                </tr>
+            """
+        html_expl += """
+            </tbody>
+        </table>
+        """
 
         return ExplanationResponse(
             sentiment=sentiment,
@@ -82,6 +110,7 @@ def explain_sentiment_with_lime(input: TweetRequest):
         )
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error during explanation: {str(e)}")
+
 
 
 @app.get("/health")
