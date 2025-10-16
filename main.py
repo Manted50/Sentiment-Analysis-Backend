@@ -67,11 +67,14 @@ def explain_sentiment_with_lime(input: TweetRequest):
         probabilities = model.predict_proba(vectorizer.transform([text]))[0]
         sentiment = "positive" if probabilities[1] > probabilities[0] else "negative"
         label_to_explain = 1 if sentiment == "positive" else 0
+
         important_words = [
             {"word": word, "importance": float(importance)}
             for word, importance in explanation.as_list(label=label_to_explain)
         ]
-        html_expl = explanation.as_html()
+
+        html_expl = explanation.as_html(label=label_to_explain)
+
         return ExplanationResponse(
             sentiment=sentiment,
             explanation=important_words,
@@ -79,6 +82,7 @@ def explain_sentiment_with_lime(input: TweetRequest):
         )
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error during explanation: {str(e)}")
+
 
 @app.get("/health")
 def health_check():
