@@ -9,8 +9,8 @@ app = FastAPI(title="Analyseur de sentiment")
 
 # Chargement des modèles
 try:
-    model = joblib.load("./artifacts/sentiment_model.joblib")
-    vectorizer = joblib.load("./artifacts/tfidf_vectorizer.joblib")
+    model = joblib.load("sentiment_model.joblib")
+    vectorizer = joblib.load("tfidf_vectorizer.joblib")
     lime_explainer = LimeTextExplainer(class_names=["negative", "positive"])
 except Exception as e:
     raise RuntimeError(f"Failed to load model or vectorizer: {str(e)}")
